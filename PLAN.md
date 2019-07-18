@@ -7,6 +7,11 @@ Drill-down Storytelling
 Scenes
 ======
 
+Scene 0
+-------
+
+* Total number of people on sunshine list vs total public sector workers vs total labour force
+
 Scene 1
 -------
 
