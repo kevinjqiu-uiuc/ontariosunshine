@@ -114,3 +114,21 @@ def overview(ctx):
         print(total_amount_last_year)
         yoy_increase = 100. * (total_amount - total_amount_last_year) / total_amount
         print('yoy_increase={}%'.format(yoy_increase))
+
+
+@task
+def scene1(ctx):
+    with closing(sqlite3.connect('sunshine.db')) as conn:
+        cursor = conn.cursor()
+        cursor.execute('SELECT calendar_year, COUNT(*) as c, SUM(salary) as s FROM sunshine GROUP BY calendar_year ORDER BY calendar_year;')
+        rows = cursor.fetchall()
+
+        data = []
+        for row in rows:
+            data.append({
+                'year': row[0],
+                'totalNumber': row[1],
+                'totalSalary': round(row[2], 2),
+                'averageSalary': round(row[2] / row[1], 2),
+            })
+        print(json.dumps(data, indent=4))
