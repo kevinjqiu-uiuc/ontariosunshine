@@ -1,7 +1,10 @@
+const PREFIX = window.location.href.indexOf('http://localhost') != -1 ? '' : '/ontariosunshine';
+
+
 $('a[data-toggle="tab"]').on('shown.bs.tab', async (e) => {
     const tabId = $(e.target).attr('id');
     if (tabId === 'scene1-tab') {
-        const data = await d3.json("/data/scene1.json");
+        const data = await d3.json(PREFIX + "/data/scene1.json");
         for (datum of data) {
             datum.year = new Date(datum.year, 1, 1);
         }
