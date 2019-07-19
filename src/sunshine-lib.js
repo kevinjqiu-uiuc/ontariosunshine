@@ -1,11 +1,3 @@
-class Serie {
-    constructor(attr, yAxisPadding, yAxisPlacement) {
-        this.attr = attr;
-        this.yAxisPadding = yAxisPadding;
-        this.yAxisPlacement = yAxisPlacement;
-    }
-}
-
 class Scene1Chart {
     constructor(data, canvasContainerSelector) {
         this.data = data;
@@ -18,6 +10,8 @@ class Scene1Chart {
 
         this.series = [];
         this.legend = [];
+
+        this.annotations = [];  // TODO: add annotation by from data
     }
 
     addSeries(serie) {
@@ -79,36 +73,24 @@ class Scene1Chart {
             .attr("d", line);
     }
 
-    clearExistingTooltips() {
-        $('div.tooltip').remove();
-    }
+    // clearExistingTooltips() {
+    //     $('div.tooltip').remove();
+    // }
 
-    renderTooltip(svg, serie, x, y/*attr, yScale, caption, formatter, color*/) {
-        const tooltipDiv = d3.select("body").append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0);
-
+    renderTooltip(svg, serie, x, y) {
         svg.selectAll('dot')
             .data(this.data)
             .enter()
             .append('circle')
             .attr('class', serie.color)
+            .attr('data-toggle', 'tooltip')
+            .attr('data-placement', 'left')
+            .attr('data-html', true)
+            .attr('title', (d) => 'Year: ' + d.year.getFullYear() + "<br/>" + serie.valueCaption + ": " + serie.valueFormatter(d[serie.attr]))
             .attr('r', 5)
             .attr("cx", d => x(d.year))
             .attr("cy", d => y(d[serie.attr]))
-            .on('mouseover', d => {
-                tooltipDiv.transition()
-                    .duration(200)
-                    .style("opacity", .9);
-                tooltipDiv.html('Year: ' + d.year.getFullYear() + "<br/>" + serie.valueCaption + ": " + serie.valueFormatter(d[serie.attr]))
-                    .style("left", (d3.event.pageX + 20) + "px")
-                    .style("top", (d3.event.pageY - 28) + "px");
-            })
-            .on("mouseout", () => {
-                tooltipDiv.transition()
-                    .duration(500)
-                    .style("opacity", 0);
-            });
+        $('[data-toggle="tooltip"]').tooltip();
     }
 
     renderLegend(svg) {
@@ -138,7 +120,6 @@ class Scene1Chart {
     }
 
     build() {
-        this.clearExistingTooltips()
         const svg = this.createCanvas();
 
         const x = this.createAndRenderXAxis(svg);

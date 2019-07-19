@@ -11,6 +11,7 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', async (e) => {
         }
         console.log(data);
         $("#scene1-container").empty();
+        $('.dropdown-toggle').dropdown();
         buildScene1(data, '#scene1-container');
     }
 });
