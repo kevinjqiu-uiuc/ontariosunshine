@@ -17,10 +17,12 @@ class Scene1Chart {
         this.height = 600 - this.margin.top - this.margin.bottom;
 
         this.series = [];
+        this.legend = [];
     }
 
     addSeries(serie) {
-        this.series = [...this.series, serie]
+        this.series = [...this.series, serie];
+        this.legend = [...this.legend, [serie.valueCaption, serie.color]];
     }
 
     createCanvas() {
@@ -77,14 +79,76 @@ class Scene1Chart {
             .attr("d", line);
     }
 
+    clearExistingTooltips() {
+        $('div.tooltip').remove();
+    }
+
+    renderTooltip(svg, serie, x, y/*attr, yScale, caption, formatter, color*/) {
+        const tooltipDiv = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        svg.selectAll('dot')
+            .data(this.data)
+            .enter()
+            .append('circle')
+            .attr('class', serie.color)
+            .attr('r', 5)
+            .attr("cx", d => x(d.year))
+            .attr("cy", d => y(d[serie.attr]))
+            .on('mouseover', d => {
+                tooltipDiv.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                tooltipDiv.html('Year: ' + d.year.getFullYear() + "<br/>" + serie.valueCaption + ": " + serie.valueFormatter(d[serie.attr]))
+                    .style("left", (d3.event.pageX + 20) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+            })
+            .on("mouseout", () => {
+                tooltipDiv.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            });
+    }
+
+    renderLegend(svg) {
+        const keys = this.legend;
+        const size = 20;
+        svg.selectAll("mydots")
+        .data(keys)
+        .enter()
+        .append("circle")
+            .attr("cx", 100)
+            .attr("cy", (_,i) => 50 + i*(size+15))
+            .attr("r", 6)
+            .attr("width", size)
+            .attr("height", size)
+            .style("fill", d => d[1])
+
+        svg.selectAll("mylabels")
+        .data(keys)
+        .enter()
+        .append("text")
+            .attr("x", 100 + size*1.2)
+            .attr("y", (_,i) => 50 + i*(size+10) + (size/2))
+            .style("fill", function(d){ return d[1]})
+            .text(function(d){ return d[0]})
+            .attr("text-anchor", "left")
+            .style("alignment-baseline", "middle")
+    }
+
     build() {
+        this.clearExistingTooltips()
         const svg = this.createCanvas();
-        console.log(svg);
+
         const x = this.createAndRenderXAxis(svg);
 
         for (const serie of this.series) {
             const y = this.renderYAxis(svg, serie);
-            this.renderLine(svg, serie, x, y)
+            this.renderLine(svg, serie, x, y);
+            this.renderTooltip(svg, serie, x, y);
         }
+
+        this.renderLegend(svg);
     }
 }
