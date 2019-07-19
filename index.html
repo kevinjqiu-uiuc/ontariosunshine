@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Data Visualization - Ontario Sunshine List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/sunshine.css">
+    <script src="https://kit.fontawesome.com/7f3ece4db4.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="row flex-nowrap justify-content-between align-items-center">
+                <div class="col-4 pt-1">
+                    <a class="text-muted" href="#"></a>
+                </div>
+                <div class="col-4 text-center">
+                    <a class="header-logo text-dark" href="#">Ontario Sunshine List</a>
+                </div>
+                <div class="col-4 d-flex justify-content-end align-items-center">
+                </div>
+            </div>
+        </header>
+
+        <div class="nav-scroller py-1 mb-2">
+            <ul class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Scene #1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Scene #2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Scene #3</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container" id="overview">
+        <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+            <div class="col-md-12 px-0">
+                <h1 class="display-4 font-italic">What is the sunshine list?</h1>
+                <p class="lead my-3" style="font-size: small">
+                    The Public Sector Salary Disclosure Act, 1996 makes Ontario’s public sector more open and accountable to taxpayers. The act requires organizations that receive public funding from the Province of Ontario to make public, by March 31 each year, the names, positions, salaries and total taxable benefits of employees paid $100,000 or more in the previous calendar year.
+                        The act applies to organizations such as:
+                        <ul>
+                        <li style="font-size:smaller">the Government of Ontario</span></li>
+                        <li style="font-size:smaller">Crown agencies</li>
+                        <li style="font-size:smaller">municipalities</li>
+                        <li style="font-size:smaller">hospitals</li>
+                        <li style="font-size:smaller">boards of public health</li>
+                        <li style="font-size:smaller">school boards</li>
+                        <li style="font-size:smaller">universities and colleges</li>
+                        <li style="font-size:smaller">Ontario Power Generation</li>
+                        <li style="font-size:smaller">other public sector employers who receive a significant level of funding from the provincial government</li>
+                        </ul>
+                <p style="font-size:small">All employers subject to the act are required to submit their disclosure records to their funding ministries by the fifth business day of March each year (this year, March 7, 2019) using the guides and forms provided.</p>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-md-4">
+                <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                    <div class="card-body d-flex flex-column align-items-start">
+                        <strong class="d-inline-block mb-2 text-primary">How Much?</strong>
+                        <h3 class="mb-0">
+                            <a class="text-dark" href="#">$175,231.54</a>
+                        </h3>
+                        <div class="mb-1 text-muted"></div>
+                        <p class="card-text mb-auto">Average Salary of those on the list</p>
+                        <a href="#">Dive In <i class="fas fa-arrow-alt-circle-right"></i></a>
+                    </div>
+                    <img class="card-img-right flex-auto d-none d-md-block" src="assets/coins.jpg" width="150px" height="250px">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                    <div class="card-body d-flex flex-column align-items-start">
+                        <strong class="d-inline-block mb-2 text-success">Who?</strong>
+                        <h3 class="mb-0">
+                            <a class="text-dark" href="#">Universities</a>
+                        </h3>
+                        <div class="mb-1 text-muted"></div>
+                        <p class="card-text mb-auto">Earns the most on the sunshine list</p>
+                        
+                        <a href="#">Dive In <i class="fas fa-arrow-alt-circle-right"></i></a>
+                    </div>
+                    <img class="card-img-right flex-auto d-none d-md-block" src="assets/buzman.jpg" width="150px" height="250px">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card flex-md-row mb-4 box-shadow h-md-250">
+                    <div class="card-body d-flex flex-column align-items-start">
+                        <strong class="d-inline-block mb-2 text-warning">Delta</strong>
+                        <h3 class="mb-0">
+                            <a class="text-dark" href="#">40%</a>
+                        </h3>
+                        <div class="mb-1 text-muted"></div>
+                        <p class="card-text mb-auto">Average year-over-year increase</p>
+                        
+                        <a href="#">Dive In <i class="fas fa-arrow-alt-circle-right"></i></a>
+                    </div>
+                    <img class="card-img-right flex-auto d-none d-md-block" src="assets/delta.jpg" width="150px" height="250px">
+                </div>
+        </div>
+    </div>
+
+    <footer class="container">
+        <p>Kevin Jing Qiu for University of Illinois CS498 Data Visualization Course</p>
+    </footer>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="src/sunshine.js"></script>
+
+</html>
