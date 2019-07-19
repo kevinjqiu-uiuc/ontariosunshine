@@ -15,6 +15,19 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', async (e) => {
 });
 
 function buildScene1(data, containerSelector) {
+    const chart = new Scene1Chart(data, containerSelector);
+    chart.addSeries({
+        attr: 'averageSalary',
+        yAxisPadding: 1000,
+        yAxisPlacement: 'left',
+        yAxisOrientation: 'left',
+        color: 'steelBlue',
+    });
+
+    chart.build();
+}
+
+function _buildScene1(data, containerSelector) {
     const getYAxis = (attr, padding, height) => {
         const maxValue = d3.max(data, d => d[attr]);
         const minValue = d3.min(data, d => d[attr]);
@@ -116,4 +129,31 @@ function buildScene1(data, containerSelector) {
     createTooltip('averageSalary', y0, 'Avg Salary: ', currencyFormatter, 'steelBlue');
     createTooltip('totalSalary', y1, 'Total Salary: ', currencyFormatter, 'orange');
     createTooltip('totalNumber', y2, 'Total Number on the list: ', v => v, 'purple');
+
+    const createLegend = () => {
+        const keys = [["Average Salary", "steelblue"], ["Total Salary", "orange"], ["Number of people on the list", "purple"]];
+        const size = 20
+        svg.selectAll("mydots")
+        .data(keys)
+        .enter()
+        .append("circle")
+            .attr("cx", 100)
+            .attr("cy", (_,i) => 50 + i*(size+15))
+            .attr("r", 6)
+            .attr("width", size)
+            .attr("height", size)
+            .style("fill", d => d[1])
+
+        svg.selectAll("mylabels")
+        .data(keys)
+        .enter()
+        .append("text")
+            .attr("x", 100 + size*1.2)
+            .attr("y", (_,i) => 50 + i*(size+10) + (size/2))
+            .style("fill", function(d){ return d[1]})
+            .text(function(d){ return d[0]})
+            .attr("text-anchor", "left")
+            .style("alignment-baseline", "middle")
+    }
+    createLegend();
 }

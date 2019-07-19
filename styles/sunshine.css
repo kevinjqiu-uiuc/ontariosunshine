@@ -33,11 +33,23 @@
     fill: steelblue;
   }
   
+  .axis-steelBlue text{
+    fill: steelblue;
+  }
+
   .axisOrange text{
     fill: orange;
   }
 
+  .axis-orange text{
+    fill: orange;
+  }
+
   .axisPurple text {
+    fill: purple;
+  }
+
+  .axis-purple text {
     fill: purple;
   }
 
