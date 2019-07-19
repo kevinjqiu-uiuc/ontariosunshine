@@ -7,6 +7,9 @@ from invoke import task
 from contextlib import closing
 
 
+MOST_RECENT_YEAR = 2018
+
+
 @task
 def clean(ctx):
     ctx.run('rm -f sunshine.db')
@@ -85,3 +88,29 @@ def init_db(ctx):
             year = data_file.split('.')[0]
             _process_data_file(cursor, 'raw_data/{}'.format(data_file), year=year)
         conn.commit()
+
+
+@task
+def overview(ctx):
+    with closing(sqlite3.connect('sunshine.db')) as conn:
+        cursor = conn.cursor()
+        cursor.execute('SELECT count(*) FROM sunshine WHERE calendar_year=?', [MOST_RECENT_YEAR])
+        num_sunshine, = cursor.fetchone()
+        print('num_sunshine={}'.format(num_sunshine))
+
+        cursor.execute('SELECT sum(salary) FROM sunshine WHERE calendar_year=?', [MOST_RECENT_YEAR])
+        total_amount, = cursor.fetchone()
+        print('total_amount={}'.format(total_amount))
+
+        cursor.execute(
+            'SELECT sector, count(*), SUM(salary)/count(*) AS avg_salary FROM sunshine WHERE calendar_year=? GROUP BY sector ORDER BY avg_salary DESC LIMIT 1;',
+            [MOST_RECENT_YEAR]
+        )
+        sector, count, avg_salary = cursor.fetchone()
+        print(sector, count, avg_salary)
+
+        cursor.execute('SELECT sum(salary) FROM sunshine WHERE calendar_year=?', [MOST_RECENT_YEAR - 1])
+        total_amount_last_year, = cursor.fetchone()
+        print(total_amount_last_year)
+        yoy_increase = 100. * (total_amount - total_amount_last_year) / total_amount
+        print('yoy_increase={}%'.format(yoy_increase))
