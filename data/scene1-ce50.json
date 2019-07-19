@@ -1,0 +1,38 @@
+[
+    {
+        "averageSalary": 134135.38, 
+        "totalSalary": 32997303.17, 
+        "totalNumber": 246, 
+        "year": 2012
+    }, 
+    {
+        "averageSalary": 134660.78, 
+        "totalSalary": 31375961.0, 
+        "totalNumber": 233, 
+        "year": 2013
+    }, 
+    {
+        "averageSalary": 133574.16, 
+        "totalSalary": 33660688.42, 
+        "totalNumber": 252, 
+        "year": 2014
+    }, 
+    {
+        "averageSalary": 134995.37, 
+        "totalSalary": 36043764.28, 
+        "totalNumber": 267, 
+        "year": 2016
+    }, 
+    {
+        "averageSalary": 134089.22, 
+        "totalSalary": 44115354.05, 
+        "totalNumber": 329, 
+        "year": 2017
+    }, 
+    {
+        "averageSalary": 133250.12, 
+        "totalSalary": 46237790.23, 
+        "totalNumber": 347, 
+        "year": 2018
+    }
+]

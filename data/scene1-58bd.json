@@ -1,0 +1,26 @@
+[
+    {
+        "averageSalary": 106481.25, 
+        "totalSalary": 2449068.78, 
+        "totalNumber": 23, 
+        "year": 2011
+    }, 
+    {
+        "averageSalary": 106383.13, 
+        "totalSalary": 3085110.64, 
+        "totalNumber": 29, 
+        "year": 2012
+    }, 
+    {
+        "averageSalary": 107096.46, 
+        "totalSalary": 3427086.83, 
+        "totalNumber": 32, 
+        "year": 2013
+    }, 
+    {
+        "averageSalary": 110087.76, 
+        "totalSalary": 4073247.01, 
+        "totalNumber": 37, 
+        "year": 2014
+    }
+]

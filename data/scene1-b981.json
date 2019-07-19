@@ -1,0 +1,20 @@
+[
+    {
+        "averageSalary": 194934.95, 
+        "totalSalary": 779739.79, 
+        "totalNumber": 4, 
+        "year": 2016
+    }, 
+    {
+        "averageSalary": 183183.54, 
+        "totalSalary": 732734.16, 
+        "totalNumber": 4, 
+        "year": 2017
+    }, 
+    {
+        "averageSalary": 206710.26, 
+        "totalSalary": 413420.52, 
+        "totalNumber": 2, 
+        "year": 2018
+    }
+]

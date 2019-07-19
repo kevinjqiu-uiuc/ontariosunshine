@@ -1,3 +1,4 @@
+import hashlib
 import json
 import io
 import sqlite3
@@ -117,7 +118,37 @@ def overview(ctx):
 
 
 @task
-def scene1(ctx):
+def all_sectors(ctx):
+    with closing(sqlite3.connect('sunshine.db')) as conn:
+        cursor = conn.cursor()
+        cursor.execute('SELECT DISTINCT sector FROM sunshine ORDER BY sector;')
+        rows = cursor.fetchall()
+
+        options = []
+        for sector_name, in rows:
+            sector_id = hashlib.md5(sector_name.encode('utf8')).hexdigest()[:4]
+            options.append('<option value="{}">{}</option>'.format(sector_id, sector_name.encode('utf8')))
+            cursor.execute(
+                'SELECT sector, calendar_year, COUNT(*) as c, SUM(salary) as s FROM sunshine GROUP BY sector, calendar_year HAVING sector=? ORDER BY calendar_year;',
+                [sector_name])
+            agg_rows = cursor.fetchall()
+            data = []
+            for agg_row in agg_rows:
+                data.append({
+                    'year': agg_row[1],
+                    'totalNumber': agg_row[2],
+                    'totalSalary': round(agg_row[3], 2),
+                    'averageSalary': round(agg_row[3] / agg_row[2], 2),
+                })
+            with open('data/scene1-{}.json'.format(sector_id), 'w') as f:
+                json.dump(data, f, indent=4)
+
+        with open('data/options.html', 'w') as f:
+            f.write('\n'.join(options))
+
+
+@task
+def scene1_all(ctx):
     with closing(sqlite3.connect('sunshine.db')) as conn:
         cursor = conn.cursor()
         cursor.execute('SELECT calendar_year, COUNT(*) as c, SUM(salary) as s FROM sunshine GROUP BY calendar_year ORDER BY calendar_year;')
@@ -131,4 +162,5 @@ def scene1(ctx):
                 'totalSalary': round(row[2], 2),
                 'averageSalary': round(row[2] / row[1], 2),
             })
-        print(json.dumps(data, indent=4))
+        with open('data/scene1.json', 'w') as f:
+            json.dump(data, f, indent=4)
