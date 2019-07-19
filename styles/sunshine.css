@@ -11,10 +11,34 @@
     pointer-events: none;
   }
 
-  circle {
+  circle.steelBlue {
     fill: #F1F3F3;
     stroke: lightsteelblue;
     stroke-width: 2px;
+  }
+
+  circle.orange {
+    fill: #F1F3F3;
+    stroke: orange;
+    stroke-width: 2px;
+  }
+
+  circle.purple {
+    fill: #F1F3F3;
+    stroke: purple;
+    stroke-width: 2px;
+  }
+
+  .axisSteelBlue text{
+    fill: steelblue;
+  }
+  
+  .axisOrange text{
+    fill: orange;
+  }
+
+  .axisPurple text {
+    fill: purple;
   }
 
   .header {
