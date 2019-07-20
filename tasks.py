@@ -127,11 +127,13 @@ def all_sectors(ctx):
         options = []
         for sector_name, in rows:
             sector_id = hashlib.md5(sector_name.encode('utf8')).hexdigest()[:4]
-            options.append('<option value="{}">{}</option>'.format(sector_id, sector_name.encode('utf8')))
             cursor.execute(
                 'SELECT sector, calendar_year, COUNT(*) as c, SUM(salary) as s FROM sunshine GROUP BY sector, calendar_year HAVING sector=? ORDER BY calendar_year;',
                 [sector_name])
             agg_rows = cursor.fetchall()
+            if len(agg_rows) < 7:
+                continue
+            options.append('<option value="{}">{}</option>'.format(sector_id, sector_name.encode('utf8')))
             data = []
             for agg_row in agg_rows:
                 data.append({

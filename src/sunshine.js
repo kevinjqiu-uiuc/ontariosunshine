@@ -5,14 +5,20 @@ const CURRENCY_FORMATTER = (v) => v.toLocaleString('en-CA', { style: 'currency',
 $('a[data-toggle="tab"]').on('shown.bs.tab', async (e) => {
     const tabId = $(e.target).attr('id');
     if (tabId === 'scene1-tab') {
-        const data = await d3.json(PREFIX + "/data/scene1.json");
-        for (datum of data) {
-            datum.year = new Date(datum.year, 1, 1);
-        }
-        console.log(data);
-        $("#scene1-container").empty();
-        $('.dropdown-toggle').dropdown();
-        buildScene1(data, '#scene1-container');
+        $('#sector-select').on('change', async function (e) {
+            const sectorId = $(e.target).children("option:selected").val();
+            const dataPathSuffix = sectorId === 'all' ? '' : '-' + sectorId;
+            const dataPath = PREFIX + '/data/scene1' + dataPathSuffix + '.json';
+
+            const data = await d3.json(dataPath);
+            for (datum of data) {
+                datum.year = new Date(datum.year, 1, 1);
+            }
+            console.log(data);
+            $("#scene1-container").empty();
+            buildScene1(data, '#scene1-container');
+        });
+        $('#sector-select').trigger('change');
     }
 });
 
