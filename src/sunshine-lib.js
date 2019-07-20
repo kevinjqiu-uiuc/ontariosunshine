@@ -1,5 +1,5 @@
 class Scene1Chart {
-    constructor(data, canvasContainerSelector) {
+    constructor(data, annotations, canvasContainerSelector) {
         this.data = data;
         this.canvasContainerSelector = canvasContainerSelector;
         this.margin = {
@@ -11,7 +11,7 @@ class Scene1Chart {
         this.series = [];
         this.legend = [];
 
-        this.annotations = [];  // TODO: add annotation by from data
+        this.annotations = annotations || [];
     }
 
     addSeries(serie) {
@@ -73,10 +73,6 @@ class Scene1Chart {
             .attr("d", line);
     }
 
-    // clearExistingTooltips() {
-    //     $('div.tooltip').remove();
-    // }
-
     renderTooltip(svg, serie, x, y) {
         svg.selectAll('dot')
             .data(this.data)
@@ -131,5 +127,16 @@ class Scene1Chart {
         }
 
         this.renderLegend(svg);
+
+        const makeAnnotations = d3.annotation()
+            .editMode(false)
+            .notePadding(15)
+            .type(d3.annotationLabel)
+            .annotations(this.annotations);
+
+        svg
+            .append("g")
+            .attr("class", "annotation-group")
+            .call(makeAnnotations);
     }
 }

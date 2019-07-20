@@ -1,0 +1,14 @@
+[
+    {
+        "note": {
+            "label": "The average salary for other public sector employees have dropped over the years",
+            "bgPadding": 20,
+            "title": "Big drop..."
+        },
+        "className": "show-bg",
+        "x": 580,
+        "y": 350,
+        "dx": -50,
+        "dy": 50
+    }
+]

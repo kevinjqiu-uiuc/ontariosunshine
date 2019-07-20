@@ -1,0 +1,14 @@
+[
+    {
+        "note": {
+            "label": "Public health sector average salary has been steadily in decline",
+            "bgPadding": 20,
+            "title": ""
+        },
+        "className": "show-bg",
+        "x": 480,
+        "y": 350,
+        "dx": -50,
+        "dy": 50
+    }
+]

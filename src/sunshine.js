@@ -14,16 +14,28 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', async (e) => {
             for (datum of data) {
                 datum.year = new Date(datum.year, 1, 1);
             }
+
+            const annotationsPath = PREFIX + '/data/scene1anno' + dataPathSuffix + '.json';
+            console.log(annotationsPath);
+
+            let annotations = [];
+            try {
+                annotations = await d3.json(annotationsPath);
+            } catch {
+            }
+
             console.log(data);
+            console.log(annotations);
+
             $("#scene1-container").empty();
-            buildScene1(data, '#scene1-container');
+            buildScene1(data, annotations, '#scene1-container');
         });
         $('#sector-select').trigger('change');
     }
 });
 
-function buildScene1(data, containerSelector) {
-    const chart = new Scene1Chart(data, containerSelector);
+function buildScene1(data, annotations, containerSelector) {
+    const chart = new Scene1Chart(data, annotations, containerSelector);
     chart.addSeries({
         attr: 'averageSalary',
         yAxisPadding: 1000,

@@ -1,0 +1,26 @@
+[
+    {
+        "note": {
+            "label": "A big increase of total salary of people on the sunshine list",
+            "bgPadding": 20,
+            "title": "Big Increase"
+        },
+        "className": "show-bg",
+        "x": 775,
+        "y": 175,
+        "dx": -50,
+        "dy": -50
+    },
+    {
+        "note": {
+            "label": "The average salary on the sunshine list declined",
+            "bgPadding": 20,
+            "title": "However..."
+        },
+        "className": "show-bg",
+        "x": 800,
+        "y": 250,
+        "dx": -50,
+        "dy": 50
+    }
+]
