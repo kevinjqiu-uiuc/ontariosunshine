@@ -142,7 +142,7 @@ def all_sectors(ctx):
                     'totalSalary': round(agg_row[3], 2),
                     'averageSalary': round(agg_row[3] / agg_row[2], 2),
                 })
-            with open('data/scene1-{}.json'.format(sector_id), 'w') as f:
+            with open('data/scene1/{}.json'.format(sector_id), 'w') as f:
                 json.dump(data, f, indent=4)
 
         with open('data/options.html', 'w') as f:
@@ -164,5 +164,24 @@ def scene1_all(ctx):
                 'totalSalary': round(row[2], 2),
                 'averageSalary': round(row[2] / row[1], 2),
             })
-        with open('data/scene1.json', 'w') as f:
+        with open('data/scene1/all.json', 'w') as f:
             json.dump(data, f, indent=4)
+
+
+@task
+def scene2(ctx):
+    with closing(sqlite3.connect('sunshine.db')) as conn:
+        for year in range(2011, 2019):
+            cursor = conn.cursor()
+            cursor.execute('SELECT sector, AVG(salary) AS avg_salary FROM sunshine WHERE calendar_year=? GROUP BY sector ORDER BY avg_salary;', [year])
+            rows = cursor.fetchall()
+
+            data = []
+            for row in rows:
+                data.append({
+                    'year': year,
+                    'sector': row[0],
+                    'averageSalary': row[1],
+                })
+            with open('data/scene2/{}.json'.format(year), 'w') as f:
+                json.dump(data, f, indent=4)

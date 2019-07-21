@@ -4,32 +4,48 @@ const CURRENCY_FORMATTER = (v) => v.toLocaleString('en-CA', { style: 'currency',
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', async (e) => {
     const tabId = $(e.target).attr('id');
-    if (tabId === 'scene1-tab') {
-        $('#sector-select').on('change', async function (e) {
-            const sectorId = $(e.target).children("option:selected").val();
-            const dataPath = PREFIX + `/data/scene1/${sectorId}.json`;
+    switch (tabId) {
+        case 'scene1-tab': {
+            $('#sector-select').on('change', async function (e) {
+                const sectorId = $(e.target).children("option:selected").val();
+                const dataPath = PREFIX + `/data/scene1/${sectorId}.json`;
 
-            const data = await d3.json(dataPath);
-            for (datum of data) {
-                datum.year = new Date(datum.year, 1, 1);
-            }
+                const data = await d3.json(dataPath);
+                for (datum of data) {
+                    datum.year = new Date(datum.year, 1, 1);
+                }
 
-            const annotationsPath = PREFIX + `/data/scene1/anno-${sectorId}.json`;
+                const annotationsPath = PREFIX + `/data/scene1/anno-${sectorId}.json`;
 
-            let annotations = [];
-            try {
-                annotations = await d3.json(annotationsPath);
-            } catch {
-                console.log(`No annotation found for sector: ${sectorId}`)
-            }
+                let annotations = [];
+                try {
+                    annotations = await d3.json(annotationsPath);
+                } catch {
+                    console.log(`No annotation found for sector: ${sectorId}`)
+                }
 
-            console.log(data);
-            console.log(annotations);
+                console.log(data);
+                console.log(annotations);
 
-            $("#scene1-container").empty();
-            buildScene1(data, annotations, '#scene1-container');
-        });
-        $('#sector-select').trigger('change');
+                $("#scene1-container").empty();
+                buildScene1(data, annotations, '#scene1-container');
+            });
+            $('#sector-select').trigger('change');
+            break;
+        }
+        case 'scene2-tab': {
+            $('#year-selector').on('change', async function (e) {
+                $('#scene2-container').empty()
+                const year = $(e.target).val();
+                $('#input-year-label').html('Year: ' + year);
+                console.log(year);
+                const dataPath = PREFIX + `/data/scene2/${year}.json`;
+                const data = await d3.json(dataPath);
+                buildScene2(data, '#scene2-container');
+            });
+            $('#year-selector').trigger('change');
+            break;
+        }
     }
 });
 
@@ -63,5 +79,10 @@ function buildScene1(data, annotations, containerSelector) {
         valueCaption: "Total # of people on the list",
     });
 
+    chart.build();
+}
+
+function buildScene2(data, containerSelector) {
+    const chart = new Scene2Chart(data, containerSelector);
     chart.build();
 }

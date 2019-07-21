@@ -140,3 +140,70 @@ class Scene1Chart {
             .call(makeAnnotations);
     }
 }
+
+class Scene2Chart {
+    constructor(data, canvasContainerSelector) {
+        this.data = data;
+        this.canvasContainerSelector = canvasContainerSelector;
+        this.margin = { top: 20, right: 20, bottom: 30, left: 250 },
+        this.width = 1000 - this.margin.left - this.margin.right,
+        this.height = 600 - this.margin.top - this.margin.bottom;
+    }
+
+    createCanvas() {
+        const svg = d3.select(this.canvasContainerSelector).append("svg")
+            .attr("width", this.width + this.margin.left + this.margin.right)
+            .attr("height", this.height + this.margin.top + this.margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + this.margin.left + "," + this.margin.top + ")");
+        return svg;
+    }
+
+    createXAxis() {
+        const x = d3.scaleLinear()
+            .range([0, this.width])
+            .domain([0, d3.max(this.data, (d) =>  d.averageSalary )]);
+        return x;
+    }
+
+    createYAxis() {
+        const y = d3.scaleBand()
+            .range([this.height, 0])
+            .padding(0.1)
+            .domain(this.data.map((d) =>  d.sector ));
+        return y;
+    }
+
+    build() {
+        const svg = this.createCanvas();
+
+        // format the data
+        this.data.forEach(function (d) {
+            d.sales = +d.sales;
+        });
+
+        const x = this.createXAxis();
+        const y = this.createYAxis();
+
+        // append the rectangles for the bar chart
+        svg.selectAll(".bar")
+            .data(this.data)
+            .enter().append("rect")
+            .attr("fill", "steelBlue")
+            //.attr("x", function(d) { return x(d.sales); })
+            .attr("width", function (d) { return x(d.averageSalary); })
+            .attr("y", function (d) { return y(d.sector); })
+            .attr("height", y.bandwidth());
+
+        // add the x Axis
+        svg.append("g")
+            .attr("transform", "translate(0," + this.height + ")")
+            .call(d3.axisBottom(x));
+
+        // add the y Axis
+        svg.append("g")
+            .call(d3.axisLeft(y));
+
+    }
+}
