@@ -38,7 +38,6 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', async (e) => {
                 $('#scene2-container').empty()
                 const year = $(e.target).val();
                 $('#input-year-label').html('Year: ' + year);
-                console.log(year);
                 const dataPath = PREFIX + `/data/scene2/${year}.json`;
                 const data = await d3.json(dataPath);
                 buildScene2(data, '#scene2-container');

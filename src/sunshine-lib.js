@@ -178,32 +178,29 @@ class Scene2Chart {
     build() {
         const svg = this.createCanvas();
 
-        // format the data
-        this.data.forEach(function (d) {
-            d.sales = +d.sales;
-        });
-
         const x = this.createXAxis();
         const y = this.createYAxis();
 
-        // append the rectangles for the bar chart
         svg.selectAll(".bar")
             .data(this.data)
-            .enter().append("rect")
+            .enter()
+            .append("rect")
             .attr("fill", "steelBlue")
-            //.attr("x", function(d) { return x(d.sales); })
-            .attr("width", function (d) { return x(d.averageSalary); })
-            .attr("y", function (d) { return y(d.sector); })
+            .attr("width", d => x(d.averageSalary))
+            .attr("y", d => y(d.sector))
+            .attr('data-toggle', 'tooltip')
+            .attr('data-placement', 'right')
+            .attr('data-html', true)
+            .attr('title', d => CURRENCY_FORMATTER(d.averageSalary))
             .attr("height", y.bandwidth());
 
-        // add the x Axis
         svg.append("g")
             .attr("transform", "translate(0," + this.height + ")")
             .call(d3.axisBottom(x));
 
-        // add the y Axis
         svg.append("g")
             .call(d3.axisLeft(y));
 
+        $('[data-toggle="tooltip"]').tooltip();
     }
 }
