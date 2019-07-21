@@ -35,11 +35,12 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', async (e) => {
         }
         case 'scene2-tab': {
             $('#year-selector').on('change', async function (e) {
-                $('#scene2-container').empty()
                 const year = $(e.target).val();
-                $('#input-year-label').html('Year: ' + year);
+                $('#input-year-label').html(`Year: ${year}`);
                 const dataPath = PREFIX + `/data/scene2/${year}.json`;
                 const data = await d3.json(dataPath);
+
+                $('#scene2-container').empty()
                 buildScene2(data, '#scene2-container');
             });
             $('#year-selector').trigger('change');

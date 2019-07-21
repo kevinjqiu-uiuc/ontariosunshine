@@ -151,12 +151,12 @@ class Scene2Chart {
     }
 
     createCanvas() {
-        const svg = d3.select(this.canvasContainerSelector).append("svg")
+        const svg = d3.select(this.canvasContainerSelector)
+            .append("svg")
             .attr("width", this.width + this.margin.left + this.margin.right)
             .attr("height", this.height + this.margin.top + this.margin.bottom)
             .append("g")
-            .attr("transform",
-                "translate(" + this.margin.left + "," + this.margin.top + ")");
+            .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
         return svg;
     }
 
