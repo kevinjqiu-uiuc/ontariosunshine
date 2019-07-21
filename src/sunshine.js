@@ -1,4 +1,4 @@
-const PREFIX = window.location.href.indexOf('http://localhost') != -1 ? '' : '/ontariosunshine';
+const PREFIX = window.location.href.indexOf('http://localhost') !== -1 ? '' : '/ontariosunshine';
 
 const CURRENCY_FORMATTER = (v) => v.toLocaleString('en-CA', { style: 'currency', currency: 'CAD' });
 
@@ -7,20 +7,20 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', async (e) => {
     if (tabId === 'scene1-tab') {
         $('#sector-select').on('change', async function (e) {
             const sectorId = $(e.target).children("option:selected").val();
-            const dataPath = PREFIX + '/data/scene1/' + sectorId + '.json';
+            const dataPath = PREFIX + `/data/scene1/${sectorId}.json`;
 
             const data = await d3.json(dataPath);
             for (datum of data) {
                 datum.year = new Date(datum.year, 1, 1);
             }
 
-            const annotationsPath = PREFIX + '/data/scene1/anno-' + sectorId + '.json';
-            console.log(annotationsPath);
+            const annotationsPath = PREFIX + `/data/scene1/anno-${sectorId}.json`;
 
             let annotations = [];
             try {
                 annotations = await d3.json(annotationsPath);
             } catch {
+                console.log(`No annotation found for sector: ${sectorId}`)
             }
 
             console.log(data);
