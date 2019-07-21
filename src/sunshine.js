@@ -7,15 +7,14 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', async (e) => {
     if (tabId === 'scene1-tab') {
         $('#sector-select').on('change', async function (e) {
             const sectorId = $(e.target).children("option:selected").val();
-            const dataPathSuffix = sectorId === 'all' ? '' : '-' + sectorId;
-            const dataPath = PREFIX + '/data/scene1' + dataPathSuffix + '.json';
+            const dataPath = PREFIX + '/data/scene1/' + sectorId + '.json';
 
             const data = await d3.json(dataPath);
             for (datum of data) {
                 datum.year = new Date(datum.year, 1, 1);
             }
 
-            const annotationsPath = PREFIX + '/data/scene1anno' + dataPathSuffix + '.json';
+            const annotationsPath = PREFIX + '/data/scene1/anno-' + sectorId + '.json';
             console.log(annotationsPath);
 
             let annotations = [];
