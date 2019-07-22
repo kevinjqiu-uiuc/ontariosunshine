@@ -185,3 +185,7 @@ def scene2(ctx):
                 })
             with open('data/scene2/{}.json'.format(year), 'w') as f:
                 json.dump(data, f, indent=4)
+
+@task
+def scene3(ctx):
+    "SELECT sector, count(*) FROM (SELECT id, sector, salary FROM sunshine WHERE calendar_year=? and salary > 500000 ORDER BY salary DESC) GROUP BY sector ORDER BY count(*) DESC;
