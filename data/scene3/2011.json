@@ -1,0 +1,24 @@
+{
+    "children": [
+        {
+            "sector": "Hospitals and Boards of Public Health", 
+            "value": 18
+        }, 
+        {
+            "sector": "Hydro One and Ontario Power Generation", 
+            "value": 18
+        }, 
+        {
+            "sector": "Other Public Sector Employers", 
+            "value": 5
+        }, 
+        {
+            "sector": "Crown Agencies", 
+            "value": 4
+        }, 
+        {
+            "sector": "Universities", 
+            "value": 4
+        }
+    ]
+}

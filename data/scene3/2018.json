@@ -1,0 +1,28 @@
+{
+    "children": [
+        {
+            "sector": "Hospitals and Boards of Public Health", 
+            "value": 20
+        }, 
+        {
+            "sector": "Ontario Power Generation", 
+            "value": 11
+        }, 
+        {
+            "sector": "Crown Agencies", 
+            "value": 10
+        }, 
+        {
+            "sector": "Other Public Sector Employers", 
+            "value": 4
+        }, 
+        {
+            "sector": "Universities", 
+            "value": 3
+        }, 
+        {
+            "sector": "Government of Ontario - Ministries", 
+            "value": 2
+        }
+    ]
+}
