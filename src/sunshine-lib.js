@@ -221,7 +221,7 @@ class Scene3Chart {
     constructor(data, annotations, canvasContainerSelector) {
         this.data = data;
         this.canvasContainerSelector = canvasContainerSelector;
-        this.margin = { top: 20, right: 20, bottom: 30, left: 40 },
+        this.margin = { top: 20, right: 0, bottom: 30, left: 200 },
         this.width = 1000 - this.margin.left - this.margin.right,
         this.height = 600 - this.margin.top - this.margin.bottom;
         this.annotations = annotations;
@@ -274,5 +274,16 @@ class Scene3Chart {
             .attr("font-size", "15px")
             .attr("fill", "white")
         $('[data-toggle="tooltip"]').tooltip();
+
+        const makeAnnotations = d3.annotation()
+            .editMode(false)
+            .notePadding(15)
+            .type(d3.annotationLabel)
+            .annotations(this.annotations);
+
+        svg
+            .append("g")
+            .attr("class", "annotation-group")
+            .call(makeAnnotations);
     }
 }
