@@ -216,3 +216,63 @@ class Scene2Chart {
             .call(makeAnnotations);
     }
 }
+
+class Scene3Chart {
+    constructor(data, annotations, canvasContainerSelector) {
+        this.data = data;
+        this.canvasContainerSelector = canvasContainerSelector;
+        this.margin = { top: 20, right: 20, bottom: 30, left: 40 },
+        this.width = 1000 - this.margin.left - this.margin.right,
+        this.height = 600 - this.margin.top - this.margin.bottom;
+        this.annotations = annotations;
+    }
+
+    createCanvas() {
+        const svg = d3.select(this.canvasContainerSelector)
+            .append("svg")
+            .attr("width", this.width + this.margin.left + this.margin.right)
+            .attr("height", this.height + this.margin.top + this.margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+        return svg;
+    }
+
+    async build() {
+        const svg = this.createCanvas();
+        const colors = ["#1b9e77","#d95f02","#7570b3","#e7298a","#66a61e","#e6ab02","#a6761d","#666666"];
+        const root = d3.hierarchy(this.data)
+            .sum(d => d.value)
+
+        d3.treemap()
+            .size([this.width, this.height])
+            .padding(2)(root)
+
+        svg
+            .selectAll("rect")
+            .data(root.leaves())
+            .enter()
+            .append("rect")
+            .attr('x', d => d.x0)
+            .attr('y', d => d.y0)
+            .attr('width', d => d.x1 - d.x0)
+            .attr('height', d => d.y1 - d.y0)
+            .attr('data-toggle', 'tooltip')
+            .attr('data-placement', 'right')
+            .attr('data-html', true)
+            .attr('title', d => `${d.data.sector}: ${d.data.value}`)
+            .style("stroke", "black")
+            .style("fill", (_, i) => colors[i % colors.length]);
+
+        svg
+            .selectAll("text")
+            .data(root.leaves())
+            .enter()
+            .append("text")
+            .attr("x", d => d.x0+5)
+            .attr("y", d => d.y0+20)
+            .text(d => d.data.sector)
+            .attr("font-size", "15px")
+            .attr("fill", "white")
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+}

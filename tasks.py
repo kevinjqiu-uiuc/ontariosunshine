@@ -188,4 +188,23 @@ def scene2(ctx):
 
 @task
 def scene3(ctx):
-    "SELECT sector, count(*) FROM (SELECT id, sector, salary FROM sunshine WHERE calendar_year=? and salary > 500000 ORDER BY salary DESC) GROUP BY sector ORDER BY count(*) DESC;
+    with closing(sqlite3.connect('sunshine.db')) as conn:
+        for year in range(2011, 2019):
+            cursor = conn.cursor()
+            cursor.execute(
+                "SELECT sector, count(*) FROM (SELECT id, sector, salary FROM sunshine WHERE calendar_year=? and salary > 500000 ORDER BY salary DESC) GROUP BY sector ORDER BY count(*) DESC;",
+                [year]
+            )
+            rows = cursor.fetchall()
+
+            data = {
+                'children': []
+            }
+
+            for row in rows:
+                data['children'].append({
+                    'sector': row[0],
+                    'value': row[1],
+                })
+            with open('data/scene3/{}.json'.format(year), 'w') as f:
+                json.dump(data, f, indent=4)

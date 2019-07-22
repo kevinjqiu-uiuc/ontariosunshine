@@ -34,9 +34,9 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', async (e) => {
             break;
         }
         case 'scene2-tab': {
-            $('#year-selector').on('change', async function (e) {
+            $('#scene2-year-selector').on('change', async function (e) {
                 const year = $(e.target).val();
-                $('#input-year-label').html(`Year: ${year}`);
+                $('#scene2-input-year-label').html(`Year: ${year}`);
                 const dataPath = PREFIX + `/data/scene2/${year}.json`;
                 const data = await d3.json(dataPath);
 
@@ -48,13 +48,30 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', async (e) => {
                     console.log(`No annotation found for year: ${year}`)
                 }
 
-                console.log(data);
-                console.log(annotations);
-
                 $('#scene2-container').empty()
                 buildScene2(data, annotations, '#scene2-container');
             });
-            $('#year-selector').trigger('change');
+            $('#scene2-year-selector').trigger('change');
+            break;
+        }
+        case 'scene3-tab': {
+            $('#scene3-year-selector').on('change', async function (e) {
+                const year = $(e.target).val();
+                $('#scene3-input-year-label').html(`Year: ${year}`);
+                const dataPath = PREFIX + `/data/scene3/${year}.json`;
+                const data = await d3.json(dataPath);
+
+                const annotationsPath = PREFIX + `/data/scene3/anno-${year}.json`;
+                let annotations = [];
+                try {
+                    annotations = await d3.json(annotationsPath);
+                } catch {
+                    console.log(`No annotation found for year: ${year}`)
+                }
+                $('#scene3-container').empty()
+                buildScene3(data, annotations, '#scene3-container');
+            });
+            $('#scene3-year-selector').trigger('change');
             break;
         }
     }
@@ -95,5 +112,10 @@ function buildScene1(data, annotations, containerSelector) {
 
 function buildScene2(data, annotations, containerSelector) {
     const chart = new Scene2Chart(data, annotations, containerSelector);
+    chart.build();
+}
+
+function buildScene3(data, annotations, containerSelector) {
+    const chart = new Scene3Chart(data, annotations, containerSelector);
     chart.build();
 }
