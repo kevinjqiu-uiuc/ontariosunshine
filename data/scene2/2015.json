@@ -1,1 +1,92 @@
-[]
+[
+    {
+        "sector": "Seconded (Labour)*", 
+        "averageSalary": 102417.14, 
+        "year": 2015
+    }, 
+    {
+        "sector": "Seconded (Community Safety & Correctional Services)*", 
+        "averageSalary": 111688.66657894739, 
+        "year": 2015
+    }, 
+    {
+        "sector": "Seconded (Energy)*", 
+        "averageSalary": 112957.43666666666, 
+        "year": 2015
+    }, 
+    {
+        "sector": "School Boards", 
+        "averageSalary": 113347.60000325982, 
+        "year": 2015
+    }, 
+    {
+        "sector": "Colleges", 
+        "averageSalary": 113357.39155397101, 
+        "year": 2015
+    }, 
+    {
+        "sector": "Seconded (Children & Youth Services)*", 
+        "averageSalary": 113540.70666666667, 
+        "year": 2015
+    }, 
+    {
+        "sector": "Municipalities & Services", 
+        "averageSalary": 118840.79032232607, 
+        "year": 2015
+    }, 
+    {
+        "sector": "Government of Ontario - Ministries", 
+        "averageSalary": 124512.96982990108, 
+        "year": 2015
+    }, 
+    {
+        "sector": "Hospitals & Boards of Public Health", 
+        "averageSalary": 129187.39018256485, 
+        "year": 2015
+    }, 
+    {
+        "sector": "Seconded (Education)*", 
+        "averageSalary": 129614.41547619051, 
+        "year": 2015
+    }, 
+    {
+        "sector": "Seconded (Community & Social Services)*", 
+        "averageSalary": 131395.66, 
+        "year": 2015
+    }, 
+    {
+        "sector": "Other Public Sector Employers", 
+        "averageSalary": 133737.63392356658, 
+        "year": 2015
+    }, 
+    {
+        "sector": "Crown Agencies", 
+        "averageSalary": 134650.53352125688, 
+        "year": 2015
+    }, 
+    {
+        "sector": "Government of Ontario - Legislative Assembly & Offices", 
+        "averageSalary": 135389.2220247933, 
+        "year": 2015
+    }, 
+    {
+        "sector": "Ontario Power Generation", 
+        "averageSalary": 140665.06990697124, 
+        "year": 2015
+    }, 
+    {
+        "sector": "Universities", 
+        "averageSalary": 147336.75770862657, 
+        "year": 2015
+    }, 
+    {
+        "sector": "Government of Ontario - Judiciary", 
+        "averageSalary": 198500.99888349685, 
+        "year": 2015
+    }, 
+    {
+        "sector": "Seconded (Health & Long\u2013Term Care)*", 
+        "averageSalary": 224621.18000000002, 
+        "year": 2015
+    }
+]

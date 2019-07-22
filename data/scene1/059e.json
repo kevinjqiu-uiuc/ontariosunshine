@@ -24,6 +24,12 @@
         "year": 2014
     }, 
     {
+        "averageSalary": 129614.42, 
+        "totalSalary": 16331416.35, 
+        "totalNumber": 126, 
+        "year": 2015
+    }, 
+    {
         "averageSalary": 131372.79, 
         "totalSalary": 14713752.86, 
         "totalNumber": 112, 
