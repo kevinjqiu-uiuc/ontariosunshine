@@ -1,0 +1,14 @@
+[
+    {
+        "note": {
+            "label": "Government of Ontario - Judiciary takes the cake",
+            "bgPadding": 20,
+            "title": "Highest paid sector on average"
+        },
+        "className": "show-bg",
+        "x": 650,
+        "y": 30,
+        "dx": 0,
+        "dy": 50
+    }
+]

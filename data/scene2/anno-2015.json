@@ -1,0 +1,26 @@
+[
+    {
+        "note": {
+            "label": "",
+            "bgPadding": 20,
+            "title": "Second on the list"
+        },
+        "className": "show-bg",
+        "x": 520,
+        "y": 50,
+        "dx": 0,
+        "dy": 50
+    },
+    {
+        "note": {
+            "label": "They're usually employees temporarily transferred to another public sector",
+            "bgPadding": 20,
+            "title": "\"Seconded\" sectors usually have very small sample size"
+        },
+        "className": "show-bg",
+        "x": 675,
+        "y": 20,
+        "dx": 0,
+        "dy": 50
+    }
+]

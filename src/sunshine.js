@@ -40,8 +40,19 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', async (e) => {
                 const dataPath = PREFIX + `/data/scene2/${year}.json`;
                 const data = await d3.json(dataPath);
 
+                const annotationsPath = PREFIX + `/data/scene2/anno-${year}.json`;
+                let annotations = [];
+                try {
+                    annotations = await d3.json(annotationsPath);
+                } catch {
+                    console.log(`No annotation found for year: ${year}`)
+                }
+
+                console.log(data);
+                console.log(annotations);
+
                 $('#scene2-container').empty()
-                buildScene2(data, '#scene2-container');
+                buildScene2(data, annotations, '#scene2-container');
             });
             $('#year-selector').trigger('change');
             break;
@@ -82,7 +93,7 @@ function buildScene1(data, annotations, containerSelector) {
     chart.build();
 }
 
-function buildScene2(data, containerSelector) {
-    const chart = new Scene2Chart(data, containerSelector);
+function buildScene2(data, annotations, containerSelector) {
+    const chart = new Scene2Chart(data, annotations, containerSelector);
     chart.build();
 }

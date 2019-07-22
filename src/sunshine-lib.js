@@ -142,12 +142,13 @@ class Scene1Chart {
 }
 
 class Scene2Chart {
-    constructor(data, canvasContainerSelector) {
+    constructor(data, annotations, canvasContainerSelector) {
         this.data = data;
         this.canvasContainerSelector = canvasContainerSelector;
         this.margin = { top: 20, right: 20, bottom: 30, left: 250 },
         this.width = 1000 - this.margin.left - this.margin.right,
         this.height = 600 - this.margin.top - this.margin.bottom;
+        this.annotations = annotations;
     }
 
     createCanvas() {
@@ -202,5 +203,16 @@ class Scene2Chart {
             .call(d3.axisLeft(y));
 
         $('[data-toggle="tooltip"]').tooltip();
+
+        const makeAnnotations = d3.annotation()
+            .editMode(false)
+            .notePadding(15)
+            .type(d3.annotationLabel)
+            .annotations(this.annotations);
+
+        svg
+            .append("g")
+            .attr("class", "annotation-group")
+            .call(makeAnnotations);
     }
 }
