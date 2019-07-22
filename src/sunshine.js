@@ -52,6 +52,7 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', async (e) => {
                 buildScene2(data, annotations, '#scene2-container');
             });
             $('#scene2-year-selector').trigger('change');
+            $('#scene2-year-selector').focus();
             break;
         }
         case 'scene3-tab': {
@@ -72,6 +73,7 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', async (e) => {
                 buildScene3(data, annotations, '#scene3-container');
             });
             $('#scene3-year-selector').trigger('change');
+            $('#scene3-year-selector').focus();
             break;
         }
     }
